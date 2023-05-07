@@ -1,0 +1,421 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "model;ui;persistence",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": false,
+    "cutTests": true,
+    "cutClient": false,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": false,
+    "cutConstructors": false
+  },
+  "graphTraversal": {
+    "forwardDepth": 50,
+    "backwardDepth": 50,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": false,
+    "hideInterfaceCalls": false, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "BothDirections" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 50,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "ui.Main",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104069929 { 
+   	label=model
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Event104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Event</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   dateLogged: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   description: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Event(description: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDate(): Date</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getDescription(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hashCode(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+EventLog104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)EventLog</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   events: Collection&lt;Event&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- EventLog()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ clear()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getInstance(): EventLog</TD></TR>
+<TR><TD ALIGN="LEFT" >+ iterator(): Iterator&lt;Event&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ logEvent(e: Event)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Message104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Message</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   content: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   pathStationsId: List&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   toStationId: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># Message(fromStationId: int, toStationId: int, content: String)</TD></TR>
+<TR><TD ALIGN="LEFT" ># Message(msg: Message, stationId: int)</TD></TR>
+<TR><TD ALIGN="LEFT" ># Message(msgJsonObj: JSONObject)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getContent(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCurrentStationId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getFromStationId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getHopCount(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPathString(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getToStationId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hashCode(): int</TD></TR>
+<TR><TD ALIGN="LEFT" ># toJsonObject(): JSONObject</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Network104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Network</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   stations: Set&lt;Station&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Network()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ Network(netJsonObj: JSONObject)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addStation(stationId: int, posX: double, posY: double, signalRadius: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getNetworkStatus(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- getOnlineStations(): Set&lt;Station&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPathStringWithLeastHops(fromStationId: int, toStationId: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- getPhysicalDistance(a: Station, b: Station): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPhysicalDistance(stationId1: int, stationId2: int): double</TD></TR>
+<TR><TD ALIGN="LEFT" >- getStationById(stationId: int): Station</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getStationStatus(stationId: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getStations(): Set&lt;Station&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hashCode(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ inboxStatus(stationId: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isReachable(sourceStationId: int, destinationStationId: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeStation(stationId: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendMessage(fromStationId: int, toStationId: int, content: String): Message</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setName(name: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setSignalRadius(stationId: int, signalRadius: double): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setStationNetState(stationId: int, isOnline: boolean): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- stationsToJsonArray(): JSONArray</TD></TR>
+<TR><TD ALIGN="LEFT" >+ toJsonObject(): JSONObject</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Station104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Station</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   inbox: List&lt;Message&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   isOnline: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   posX: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   posY: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   signalRadius: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># Station(id: int, posX: double, posY: double, signalRadius: double)</TD></TR>
+<TR><TD ALIGN="LEFT" ># Station(stationJsonObj: JSONObject)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ compareTo(station: Station): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCurrentSignalRadius(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getId(): int</TD></TR>
+<TR><TD ALIGN="LEFT" ># getInbox(): List&lt;Message&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPosX(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPosY(): double</TD></TR>
+<TR><TD ALIGN="LEFT" ># getSignalRadiusStatus(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ hashCode(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- inboxToJsonArray(): JSONArray</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isOnline(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># pushInbox(msg: Message)</TD></TR>
+<TR><TD ALIGN="LEFT" ># setNetState(isOnline: boolean): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># setSignalRadius(signalRadius: double): double</TD></TR>
+<TR><TD ALIGN="LEFT" ># toJsonObject(): JSONObject</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1293532513 { 
+   	label=persistence
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   JsonFileIO1293532513[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)JsonFileIO</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   file: File [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   jsonObj: JSONObject [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ JsonFileIO(filePath: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getJsonObject(): JSONObject</TD></TR>
+<TR><TD ALIGN="LEFT" >+ loadFile(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ setJsonObject(jsonObj: JSONObject)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ writeFile(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3732 { 
+   	label=ui
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Main3732[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Main</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+NetworkStatusWindow3732[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NetworkStatusWindow</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   networkManager: StationNetworkManagerConsole [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   panel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   statusArea: JTextArea [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ NetworkStatusWindow(networkManager: StationNetworkManagerConsole)</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateStatus()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+NetworkVisualizationWindow3732[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)NetworkVisualizationWindow</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   networkManager: StationNetworkManagerGUI [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   panel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   prevStationsHash: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   visualPanel: JScrollPane [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ NetworkVisualizationWindow(networkManager: StationNetworkManagerGUI)</TD></TR>
+<TR><TD ALIGN="LEFT" >- createUIComponents()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+StationNetworkManagerConsole3732[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)StationNetworkManagerConsole</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   input: Scanner [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   network: Network [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ StationNetworkManagerConsole()</TD></TR>
+<TR><TD ALIGN="LEFT" ># addNetworkStation(stationId: int, posX: double, posY: double, signalRadius: double): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- commandNotFound()</TD></TR>
+<TR><TD ALIGN="LEFT" ># getCommandHelp()</TD></TR>
+<TR><TD ALIGN="LEFT" ># getInboxStatus(stationId: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" ># getNetworkStatus(): String</TD></TR>
+<TR><TD ALIGN="LEFT" ># getPathStringWithLeastHops(srcStationID: int, destStationID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" ># getPhysicalDistanceTwoStations(stationId1: int, stationId2: int): double</TD></TR>
+<TR><TD ALIGN="LEFT" ># getStationStatus(stationId: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" ># getStations(): Set&lt;Station&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" ># isReachable(srcStationID: int, destStationID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" ># loadNetwork(loadPath: String)</TD></TR>
+<TR><TD ALIGN="LEFT" ># printProgramInfo()</TD></TR>
+<TR><TD ALIGN="LEFT" ># removeStationById(stationId: int)</TD></TR>
+<TR><TD ALIGN="LEFT" ># renameNetwork(name: String)</TD></TR>
+<TR><TD ALIGN="LEFT" ># runNetworkManager()</TD></TR>
+<TR><TD ALIGN="LEFT" ># saveNetwork(savePath: String)</TD></TR>
+<TR><TD ALIGN="LEFT" ># sendMessage(srcStationId: int, destStationId: int, content: String)</TD></TR>
+<TR><TD ALIGN="LEFT" ># setStationNetStat(stationId: int, online: boolean)</TD></TR>
+<TR><TD ALIGN="LEFT" ># setStationSignalRadiusById(stationId: int, signalRadius: double)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+StationNetworkManagerGUI3732[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)StationNetworkManagerGUI</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   addStationTool: JToolBar [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnAddStation: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnDestInbox: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnPathLeastHops: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnPhyDistance: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnReachable: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnRmvDestStation: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnRmvSrcStation: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnSendMsg: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnSrcInbox: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cbDestOn: JCheckBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cbSrcOn: JCheckBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   consoleArea: JTextArea [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   consoleScrollPanel: JScrollPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   currentFile: File [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   destinationSelector: JComboBox&lt;Station&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   destinationStationPanel: JTabbedPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   destinationStatusArea: JTextArea [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   inputStationId: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   inputStationX: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   inputStationY: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   menuBar: JMenuBar [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   networkTools: JToolBar [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   panel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   previewDestSignalR: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   previewSrcSignalR: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sldDestSignalR: JSlider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sldSrcSignalR: JSlider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sourceSelector: JComboBox&lt;Station&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sourceStationPanel: JTabbedPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sourceStatusArea: JTextArea [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   twinStationsPanel: JSplitPane [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ StationNetworkManagerGUI()</TD></TR>
+<TR><TD ALIGN="LEFT" >- areSrcDestStationsBothSelected(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- createAddStationToolbar()</TD></TR>
+<TR><TD ALIGN="LEFT" >- createConsoleArea()</TD></TR>
+<TR><TD ALIGN="LEFT" >- createMenuBar()</TD></TR>
+<TR><TD ALIGN="LEFT" >- createNetworkToolbar()</TD></TR>
+<TR><TD ALIGN="LEFT" >- createStationArea(stationSelector: JComboBox&lt;Station&gt;, statusArea: JTextArea, btnRmvStation: JButton, cbStaOn: JCheckBox, sldStaSignalR: JSlider, previewSignalR: JLabel, btnInbox: JButton)</TD></TR>
+<TR><TD ALIGN="LEFT" >- createUIComponents()</TD></TR>
+<TR><TD ALIGN="LEFT" >- isStationSelected(stationSelector: JComboBox&lt;Station&gt;): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- redirectSystemOutErrStream(out: PrintStream, err: PrintStream)</TD></TR>
+<TR><TD ALIGN="LEFT" ># runNetworkManager()</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateConsole(output: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateStationSelectorList(stationSelector: JComboBox&lt;Station&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateStationStatusArea(statusArea: JTextArea, selectedStation: Station)</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateTitle()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+EventLog104069929 -> Event104069929[label="events
+[0..*]"];
+Main3732 -> StationNetworkManagerGUI3732[label="main() -> StationNetworkManagerGUI()"];
+Network104069929 -> Station104069929[label="stations
+[0..*]"];
+NetworkStatusWindow3732 -> StationNetworkManagerConsole3732[label="networkManager
+[0..1]"];
+NetworkVisualizationWindow3732 -> StationNetworkManagerGUI3732[label="networkManager
+[0..1]"];
+Station104069929 -> Message104069929[label="inbox
+[0..*]"];
+StationNetworkManagerConsole3732 -> Network104069929[label="network
+[0..1]"];
+StationNetworkManagerConsole3732 -> StationNetworkManagerGUI3732[arrowhead=none, arrowtail=empty, dir=both];
+StationNetworkManagerGUI3732 -> EventLog104069929[label="StationNetworkManagerGUI() -> getInstance()"];
+StationNetworkManagerGUI3732 -> NetworkStatusWindow3732[label="createMenuBar() -> NetworkStatusWindow()"];
+StationNetworkManagerGUI3732 -> NetworkVisualizationWindow3732[label="createMenuBar() -> NetworkVisualizationWindow()"];
+StationNetworkManagerGUI3732 -> Station104069929[label="destinationSelector
+[0..1]"];
+StationNetworkManagerGUI3732 -> Station104069929[label="sourceSelector
+[0..1]"];
+    
+}
+@enduml

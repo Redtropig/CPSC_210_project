@@ -1,0 +1,97 @@
+{
+    "name": "Unnamed",
+    "stations": [
+        {
+            "posX": 0,
+            "posY": 0,
+            "isOnline": true,
+            "id": 1,
+            "inbox": [],
+            "signalRadius": 100
+        },
+        {
+            "posX": 90,
+            "posY": 0,
+            "isOnline": false,
+            "id": 2,
+            "inbox": [],
+            "signalRadius": 50
+        },
+        {
+            "posX": 130,
+            "posY": 0,
+            "isOnline": true,
+            "id": 3,
+            "inbox": [
+                {
+                    "pathStationsId": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "content": "test-1",
+                    "toStationId": 3
+                },
+                {
+                    "pathStationsId": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "content": "test-2",
+                    "toStationId": 3
+                },
+                {
+                    "pathStationsId": [
+                        1,
+                        2,
+                        3
+                    ],
+                    "content": "test-3",
+                    "toStationId": 3
+                }
+            ],
+            "signalRadius": 25
+        },
+        {
+            "posX": 0,
+            "posY": 90,
+            "isOnline": true,
+            "id": 4,
+            "inbox": [],
+            "signalRadius": 100
+        },
+        {
+            "posX": -114.514,
+            "posY": 114.514,
+            "isOnline": true,
+            "id": 5,
+            "inbox": [],
+            "signalRadius": 11.45
+        },
+        {
+            "posX": 100,
+            "posY": 0,
+            "isOnline": true,
+            "id": 6,
+            "inbox": [],
+            "signalRadius": 11
+        },
+        {
+            "posX": 123,
+            "posY": 0,
+            "isOnline": false,
+            "id": 7,
+            "inbox": [],
+            "signalRadius": 9
+        },
+        {
+            "posX": 110,
+            "posY": 0,
+            "isOnline": true,
+            "id": 8,
+            "inbox": [],
+            "signalRadius": 15
+        }
+    ]
+}
