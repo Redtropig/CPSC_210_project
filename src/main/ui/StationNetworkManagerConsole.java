@@ -12,7 +12,7 @@ import java.util.*;
 // Wireless Station Network Management System (WSNMS)
 public class StationNetworkManagerConsole extends JFrame {
     private static final String PROGRAM_NAME = "Wireless Station Network Management System";
-    private static final String PROGRAM_VERSION = "ver. Phase 3";
+    private static final String PROGRAM_VERSION = "ver. Phase 4";
     private static final String PROGRAM_DESCRIPTION = "(Responsive Feedback Area for User Actions, NOT Logging)";
     protected static final String DEFAULT_SAVE_PATH = "./data/network.json";
     protected static final PrintStream DEFAULT_SYS_OUT = System.out;
